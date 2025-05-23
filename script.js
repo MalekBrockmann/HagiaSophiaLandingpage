@@ -1,0 +1,247 @@
+// Intersection Observer for section animations
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+// Observe all sections
+document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
+});
+
+// Header scroll effect
+const header = document.querySelector('.header');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+        header.classList.remove('scroll-up');
+        return;
+    }
+    
+    if (currentScroll > lastScroll && !header.classList.contains('scroll-down')) {
+        // Scroll Down
+        header.classList.remove('scroll-up');
+        header.classList.add('scroll-down');
+    } else if (currentScroll < lastScroll && header.classList.contains('scroll-down')) {
+        // Scroll Up
+        header.classList.remove('scroll-down');
+        header.classList.add('scroll-up');
+    }
+    lastScroll = currentScroll;
+});
+
+function toggleFullscreen() {
+    const wrapper = document.querySelector('.unity-wrapper');
+    const button = document.getElementById('fullscreen-btn');
+    
+    if (!document.fullscreenElement) {
+        wrapper.requestFullscreen().catch(err => {
+            console.log(`Error attempting to enable fullscreen: ${err.message}`);
+        });
+        wrapper.classList.add('fullscreen');
+        button.classList.add('fullscreen');
+    } else {
+        document.exitFullscreen();
+        wrapper.classList.remove('fullscreen');
+        button.classList.remove('fullscreen');
+    }
+}
+
+// Event-Listener für Fullscreen-Änderungen
+document.addEventListener('fullscreenchange', () => {
+    const wrapper = document.querySelector('.unity-wrapper');
+    const button = document.getElementById('fullscreen-btn');
+    
+    if (!document.fullscreenElement) {
+        wrapper.classList.remove('fullscreen');
+        button.classList.remove('fullscreen');
+    }
+});
+
+// Language switching functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Logo click handler for smooth scroll to top
+    const logo = document.getElementById('logo');
+    logo.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    const languageToggle = document.getElementById('languageToggle');
+    
+    // Translations object
+    const translations = {
+        en: {
+            about: 'About',
+            history: 'History',
+            model: '3D Model',
+            gallery: 'Gallery',
+            heroTitle: 'Old Hagia Sophia',
+            heroSubtitle: '3D Reconstruction and Analysis of Hidden Structures',
+            aboutText1: 'We are a small interdisciplinary student team from Furtwangen University (HFU), working within the framework of our project studies. In collaboration with the Byzantine Studies Department at the University of Freiburg, we are developing a digital application that enables the exploration and analysis of archaeological findings beneath the present-day Hagia Sophia.',
+            aboutText2: 'Using state-of-the-art 3D reconstruction techniques, we digitally model the excavations to make them accessible for academic research and public education. Our goal is to rediscover archaeological knowledge through technological approaches and to present it vividly and interactively to a broader public.',
+            historyText: 'From Byzantine cathedral to Ottoman mosque, explore the rich history of this architectural masterpiece.',
+            connect: 'Connect',
+            legal: 'Legal',
+            impressum: 'Impressum',
+            privacyPolicy: 'Privacy Policy',
+            copyright: '© 2024 Hagia Sophia Project. All rights reserved.',
+            // Section headings
+            aboutHeading: 'About',
+            modelHeading: '3D Experience',
+            historyHeading: 'History',
+            galleryHeading: 'Gallery',
+            impressumHeading: 'Legal Notice',
+            tmgInfo: 'Information according to § 5 TMG',
+            contact: 'Contact',
+            responsible: 'Responsible for content according to § 55 Abs. 2 RStV',
+            disclaimer: 'Disclaimer',
+            contentLiability: 'Liability for Content',
+            contentLiabilityText: 'The contents of our pages have been created with the utmost care. However, we cannot guarantee the accuracy, completeness, and timeliness of the content.',
+            linkLiability: 'Liability for Links',
+            linkLiabilityText: 'Our offer contains links to external websites of third parties, on whose contents we have no influence. Therefore, we cannot assume any liability for these external contents.'
+        },
+        de: {
+            about: 'Über uns',
+            history: 'Geschichte',
+            model: '3D Modell',
+            gallery: 'Galerie',
+            heroTitle: 'Alte Hagia Sophia',
+            heroSubtitle: '3D-Rekonstruktion und Analyse versteckter Strukturen',
+            aboutText1: 'Wir sind ein kleines interdisziplinäres Studententeam der Hochschule Furtwangen (HFU), das im Rahmen unserer Projektstudien arbeitet. In Zusammenarbeit mit der Byzantinischen Abteilung der Universität Freiburg entwickeln wir eine digitale Anwendung, die die Erforschung und Analyse archäologischer Funde unter der heutigen Hagia Sophia ermöglicht.',
+            aboutText2: 'Mit Hilfe modernster 3D-Rekonstruktionstechniken modellieren wir die Ausgrabungen digital, um sie für die akademische Forschung und öffentliche Bildung zugänglich zu machen. Unser Ziel ist es, archäologisches Wissen durch technologische Ansätze neu zu erschließen und einer breiteren Öffentlichkeit anschaulich und interaktiv zu vermitteln.',
+            historyText: 'Von der byzantinischen Kathedrale zur osmanischen Moschee - erkunden Sie die reiche Geschichte dieses architektonischen Meisterwerks.',
+            connect: 'Kontakt',
+            legal: 'Rechtliches',
+            impressum: 'Impressum',
+            privacyPolicy: 'Datenschutz',
+            copyright: '© 2024 Hagia Sophia Projekt. Alle Rechte vorbehalten.',
+            // Section headings
+            aboutHeading: 'Über uns',
+            modelHeading: '3D Erlebnis',
+            historyHeading: 'Geschichte',
+            galleryHeading: 'Galerie',
+            impressumHeading: 'Impressum',
+            tmgInfo: 'Angaben gemäß § 5 TMG',
+            contact: 'Kontakt',
+            responsible: 'Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV',
+            disclaimer: 'Haftungsausschluss',
+            contentLiability: 'Haftung für Inhalte',
+            contentLiabilityText: 'Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.',
+            linkLiability: 'Haftung für Links',
+            linkLiabilityText: 'Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.',
+            copyright: 'Urheberrecht',
+            copyrightText: 'Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.'
+        }
+    };
+
+    // Function to update text content
+    function updateLanguage(lang) {
+        try {
+            // Navigation links
+            const navElements = {
+                about: document.querySelector('a[href="#about"]'),
+                history: document.querySelector('a[href="#history"]'),
+                model: document.querySelector('a[href="#model"]'),
+                gallery: document.querySelector('a[href="#gallery"]')
+            };
+
+            // Update navigation if elements exist
+            Object.entries(navElements).forEach(([key, element]) => {
+                if (element) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Hero section
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            if (heroTitle) heroTitle.textContent = translations[lang].heroTitle;
+            if (heroSubtitle) heroSubtitle.textContent = translations[lang].heroSubtitle;
+
+            // Section headings
+            const headings = {
+                about: document.querySelector('#about h2'),
+                model: document.querySelector('#model h2'),
+                history: document.querySelector('#history h2'),
+                gallery: document.querySelector('#gallery h2')
+            };
+
+            // Update headings if they exist
+            Object.entries(headings).forEach(([key, element]) => {
+                if (element) {
+                    element.textContent = translations[lang][`${key}Heading`];
+                }
+            });
+
+            // Section texts
+            const aboutTexts = document.querySelectorAll('#about .section-text');
+            if (aboutTexts.length >= 2) {
+                aboutTexts[0].textContent = translations[lang].aboutText1;
+                aboutTexts[1].textContent = translations[lang].aboutText2;
+            }
+
+            const historyText = document.querySelector('#history .section-text');
+            if (historyText) {
+                historyText.textContent = translations[lang].historyText;
+            }
+
+            // Footer
+            const footerElements = {
+                connect: document.querySelector('.footer-section h3:first-child'),
+                legal: document.querySelector('.footer-section h3:last-child'),
+                impressum: document.querySelector('.footer-link:first-child'),
+                privacyPolicy: document.querySelector('.footer-link:last-child'),
+                copyright: document.querySelector('.footer-bottom p')
+            };
+
+            // Update footer if elements exist
+            Object.entries(footerElements).forEach(([key, element]) => {
+                if (element) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        } catch (error) {
+            console.error('Error updating language:', error);
+        }
+    }
+
+    // Toggle language
+    languageToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const newLang = this.classList.contains('active') ? 'de' : 'en';
+        updateLanguage(newLang);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const headerOffset = 80; // Height of the fixed header
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}); 
