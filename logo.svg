@@ -10,19 +10,16 @@
   <g stroke="#333" stroke-width="2">
     <rect x="48" y="98" width="6" height="54" fill="none"/>
     <rect x="68" y="98" width="6" height="54" fill="none"/>
-    <rect x="97" y="98" width="6" height="54" fill="none"/>
     <rect x="126" y="98" width="6" height="54" fill="none"/>
     <rect x="146" y="98" width="6" height="54" fill="none"/>
     <!-- Kapitelle -->
     <rect x="46" y="94" width="10" height="6" fill="none"/>
     <rect x="66" y="94" width="10" height="6" fill="none"/>
-    <rect x="95" y="94" width="10" height="6" fill="none"/>
     <rect x="124" y="94" width="10" height="6" fill="none"/>
     <rect x="144" y="94" width="10" height="6" fill="none"/>
     <!-- Basen -->
     <rect x="46" y="152" width="10" height="6" fill="none"/>
     <rect x="66" y="152" width="10" height="6" fill="none"/>
-    <rect x="95" y="152" width="10" height="6" fill="none"/>
     <rect x="124" y="152" width="10" height="6" fill="none"/>
     <rect x="144" y="152" width="10" height="6" fill="none"/>
   </g>
@@ -31,5 +28,5 @@
   <rect x="42" y="164" width="116" height="6" fill="none" stroke="#333" stroke-width="1.2"/>
   <rect x="46" y="170" width="108" height="6" fill="none" stroke="#333" stroke-width="1"/>
   <!-- Türöffnung -->
-  <rect x="90" y="110" width="20" height="32" fill="none" stroke="#333" stroke-width="1.5"/>
+  <rect x="90" y="110" width="20" height="42" fill="none" stroke="#333" stroke-width="1.5"/>
 </svg> 

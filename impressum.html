@@ -14,7 +14,7 @@
     <header class="header">
         <nav class="nav-container">
             <div class="logo" id="logo">
-                <img src="logo.svg" alt="Hagia Sophia Logo" width="40" height="40">
+                <img src="logo.svg" alt="Hagia Sophia Logo" width="60" height="60">
             </div>
             <ul class="nav-links">
                 <li><a href="index.html#about">About</a></li>
@@ -23,10 +23,9 @@
                 <li><a href="index.html#gallery">Gallery</a></li>
             </ul>
             <div class="language-switch">
-                <button class="language-toggle" id="languageToggle">
+                <button class="language-toggle active" id="languageToggle">
                     <div class="toggle-track">
                         <div class="toggle-thumb">
-                            <span class="flag-icon flag-icon-gb"></span>
                             <span class="flag-icon flag-icon-de"></span>
                         </div>
                     </div>
@@ -38,33 +37,67 @@
     <main>
         <section class="section">
             <div class="container">
-                <h2 id="impressum-heading">Impressum</h2>
-                <div class="impressum-content">
-                    <h3 id="tmg-info">Angaben gemäß § 5 TMG</h3>
-                    <p>Hochschule Furtwangen<br>
-                    Robert-Gerwig-Platz 1<br>
-                    78120 Furtwangen</p>
+                <div class="language-content">
+                    <div class="content-de">
+                        <h2 id="impressum-heading">Impressum</h2>
+                        <div class="impressum-content">
+                            <h3 id="tmg-info">Angaben gemäß § 5 TMG</h3>
+                            <p>Hochschule Furtwangen<br>
+                            Robert-Gerwig-Platz 1<br>
+                            78120 Furtwangen</p>
 
-                    <h3 id="contact">Kontakt</h3>
-                    <p>Telefon: +49 (0) 7723 920-0<br>
-                    E-Mail: info@hs-furtwangen.de</p>
+                            <h3 id="contact">Kontakt</h3>
+                            <p>Telefon: +49 (0) 7723 920-0<br>
+                            E-Mail: info@hs-furtwangen.de</p>
 
-                    <h3 id="responsible">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
-                    <p>Prof. Dr. [Name des Projektbetreuers]<br>
-                    Hochschule Furtwangen<br>
-                    Fakultät [Name der Fakultät]<br>
-                    Robert-Gerwig-Platz 1<br>
-                    78120 Furtwangen</p>
+                            <h3 id="responsible">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
+                            <p>Prof. Dr. [Name des Projektbetreuers]<br>
+                            Hochschule Furtwangen<br>
+                            Fakultät [Name der Fakultät]<br>
+                            Robert-Gerwig-Platz 1<br>
+                            78120 Furtwangen</p>
 
-                    <h3 id="disclaimer">Haftungsausschluss</h3>
-                    <h4 id="content-liability">Haftung für Inhalte</h4>
-                    <p id="content-liability-text">Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>
+                            <h3 id="disclaimer">Haftungsausschluss</h3>
+                            <h4 id="content-liability">Haftung für Inhalte</h4>
+                            <p id="content-liability-text">Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>
 
-                    <h4 id="link-liability">Haftung für Links</h4>
-                    <p id="link-liability-text">Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.</p>
+                            <h4 id="link-liability">Haftung für Links</h4>
+                            <p id="link-liability-text">Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.</p>
 
-                    <h4 id="copyright">Urheberrecht</h4>
-                    <p id="copyright-text">Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+                            <h4 id="copyright">Urheberrecht</h4>
+                            <p id="copyright-text">Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+                        </div>
+                    </div>
+                    <div class="content-en" style="display: none;">
+                        <h2 id="impressum-heading">Legal Notice</h2>
+                        <div class="impressum-content">
+                            <h3 id="tmg-info">Information according to § 5 TMG</h3>
+                            <p>Furtwangen University<br>
+                            Robert-Gerwig-Platz 1<br>
+                            78120 Furtwangen</p>
+
+                            <h3 id="contact">Contact</h3>
+                            <p>Phone: +49 (0) 7723 920-0<br>
+                            Email: info@hs-furtwangen.de</p>
+
+                            <h3 id="responsible">Responsible for content according to § 55 Abs. 2 RStV</h3>
+                            <p>Prof. Dr. [Project Supervisor Name]<br>
+                            Furtwangen University<br>
+                            Faculty [Faculty Name]<br>
+                            Robert-Gerwig-Platz 1<br>
+                            78120 Furtwangen</p>
+
+                            <h3 id="disclaimer">Disclaimer</h3>
+                            <h4 id="content-liability">Liability for Content</h4>
+                            <p id="content-liability-text">The contents of our pages have been created with the utmost care. However, we cannot guarantee the accuracy, completeness, and timeliness of the content.</p>
+
+                            <h4 id="link-liability">Liability for Links</h4>
+                            <p id="link-liability-text">Our offer contains links to external websites of third parties, on whose contents we have no influence. Therefore, we cannot assume any liability for these external contents.</p>
+
+                            <h4 id="copyright">Copyright</h4>
+                            <p id="copyright-text">The content and works created by the site operators on these pages are subject to German copyright law. Duplication, processing, distribution, or any form of commercialization of such material beyond the scope of the copyright law shall require the prior written consent of its respective author or creator.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -74,21 +107,49 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Connect</h3>
-                    <div class="social-links">
-                        <a href="#" class="social-link">Instagram</a>
-                        <a href="#" class="social-link">Twitter</a>
-                        <a href="#" class="social-link">LinkedIn</a>
+                    <div class="language-content">
+                        <div class="content-de">
+                            <h3>Kontakt</h3>
+                            <div class="social-links">
+                                <a href="#" class="social-link">Instagram</a>
+                                <a href="#" class="social-link">Twitter</a>
+                                <a href="#" class="social-link">LinkedIn</a>
+                            </div>
+                        </div>
+                        <div class="content-en" style="display: none;">
+                            <h3>Connect</h3>
+                            <div class="social-links">
+                                <a href="#" class="social-link">Instagram</a>
+                                <a href="#" class="social-link">Twitter</a>
+                                <a href="#" class="social-link">LinkedIn</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h3>Legal</h3>
-                    <a href="impressum.html" class="footer-link">Impressum</a>
-                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <div class="language-content">
+                        <div class="content-de">
+                            <h3>Rechtliches</h3>
+                            <a href="impressum.html" class="footer-link">Impressum</a>
+                            <a href="#" class="footer-link">Datenschutz</a>
+                        </div>
+                        <div class="content-en" style="display: none;">
+                            <h3>Legal</h3>
+                            <a href="impressum.html" class="footer-link">Impressum</a>
+                            <a href="#" class="footer-link">Privacy Policy</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Hagia Sophia Project. All rights reserved.</p>
+                <div class="language-content">
+                    <div class="content-de">
+                        <p>&copy; 2024 Hagia Sophia Projekt. Alle Rechte vorbehalten.</p>
+                    </div>
+                    <div class="content-en" style="display: none;">
+                        <p>&copy; 2024 Hagia Sophia Project. All rights reserved.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>

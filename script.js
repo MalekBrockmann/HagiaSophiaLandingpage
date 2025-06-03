@@ -82,7 +82,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const languageToggle = document.getElementById('languageToggle');
-    
+    const toggleThumb = document.querySelector('.toggle-thumb');
+    let isEnglish = false;  // Start with German
+
+    // Set initial flag to German
+    const flagIcon = toggleThumb.querySelector('.flag-icon');
+    flagIcon.className = 'flag-icon flag-icon-de';
+    languageToggle.classList.add('active');
+
     // Translations object
     const translations = {
         en: {
@@ -222,9 +229,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Toggle language
     languageToggle.addEventListener('click', function() {
-        this.classList.toggle('active');
-        const newLang = this.classList.contains('active') ? 'de' : 'en';
-        updateLanguage(newLang);
+        isEnglish = !isEnglish;
+        const toggleThumb = document.querySelector('.toggle-thumb');
+        const flagIcon = toggleThumb.querySelector('.flag-icon');
+        
+        // Toggle active class for styling
+        languageToggle.classList.toggle('active');
+        
+        // Update flag
+        if (isEnglish) {
+            flagIcon.className = 'flag-icon flag-icon-gb';
+        } else {
+            flagIcon.className = 'flag-icon flag-icon-de';
+        }
+        
+        // Toggle content visibility
+        const germanContent = document.querySelectorAll('.content-de');
+        const englishContent = document.querySelectorAll('.content-en');
+        
+        germanContent.forEach(content => {
+            content.style.display = isEnglish ? 'none' : 'block';
+        });
+        
+        englishContent.forEach(content => {
+            content.style.display = isEnglish ? 'block' : 'none';
+        });
     });
 
     // Smooth scrolling for navigation links
