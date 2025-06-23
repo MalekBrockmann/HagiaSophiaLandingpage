@@ -111,20 +111,87 @@
                 <div class="language-content">
                     <div class="content-de">
                         <h2>Galerie</h2>
+                        <p class="section-text">Bildergalerie zur Unterstützung virtueller Rekonstruktionen</p>
                     </div>
                     <div class="content-en" style="display: none;">
                         <h2>Gallery</h2>
+                        <p class="section-text">Image Gallery Supporting Virtual Reconstructions</p>
                     </div>
                 </div>
                 <div class="gallery-grid">
-                    <!-- Gallery placeholders -->
-                    <div class="gallery-item"></div>
-                    <div class="gallery-item"></div>
-                    <div class="gallery-item"></div>
-                    <div class="gallery-item"></div>
+                    <div class="gallery-item" data-image="Bilder/Architrav.jpg" data-title="Architrav">
+                        <img src="Bilder/Architrav.jpg" alt="Architrav der Alten Hagia Sophia" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Architrav</h3>
+                                <p>Architrav der Alten Hagia Sophia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-image="Bilder/Giebelblock.jpg" data-title="Giebelblock">
+                        <img src="Bilder/Giebelblock.jpg" alt="Giebelblock der Alten Hagia Sophia" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Giebelblock</h3>
+                                <p>Giebelblock der Alten Hagia Sophia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-image="Bilder/Lämmerfries.jpg" data-title="Lämmerfries">
+                        <img src="Bilder/Lämmerfries.jpg" alt="Lämmerfries der Alten Hagia Sophia" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Lämmerfries</h3>
+                                <p>Lämmerfries der Alten Hagia Sophia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-image="Bilder/Pfeilerkapitell.jpg" data-title="Pfeilerkapitell">
+                        <img src="Bilder/Pfeilerkapitell.jpg" alt="Pfeilerkapitell der Alten Hagia Sophia" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Pfeilerkapitell</h3>
+                                <p>Pfeilerkapitell der Alten Hagia Sophia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-image="Bilder/Bogenblock.jpg" data-title="Bogenblock">
+                        <img src="Bilder/Bogenblock.jpg" alt="Bogenblock der Alten Hagia Sophia" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Bogenblock</h3>
+                                <p>Bogenblock der Alten Hagia Sophia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-image="Bilder/Kasettenblock.jpg" data-title="Kasettenblock">
+                        <img src="Bilder/Kasettenblock.jpg" alt="Kasettenblock der Alten Hagia Sophia" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Kasettenblock</h3>
+                                <p>Kasettenblock der Alten Hagia Sophia</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox">
+            <div class="lightbox-content">
+                <span class="lightbox-close">&times;</span>
+                <button class="lightbox-nav lightbox-prev">&lt;</button>
+                <button class="lightbox-nav lightbox-next">&gt;</button>
+                <div class="lightbox-image-container">
+                    <img id="lightbox-image" src="" alt="">
+                </div>
+                <div class="lightbox-caption">
+                    <h3 id="lightbox-title"></h3>
+                    <p id="lightbox-description"></p>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="footer">

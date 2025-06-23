@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             aboutText1: 'We are a small interdisciplinary student team from Furtwangen University (HFU), working within the framework of our project studies. In collaboration with the Byzantine Studies Department at the University of Freiburg, we are developing a digital application that enables the exploration and analysis of archaeological findings beneath the present-day Hagia Sophia.',
             aboutText2: 'Using state-of-the-art 3D reconstruction techniques, we digitally model the excavations to make them accessible for academic research and public education. Our goal is to rediscover archaeological knowledge through technological approaches and to present it vividly and interactively to a broader public.',
             historyText: 'From Byzantine cathedral to Ottoman mosque, explore the rich history of this architectural masterpiece.',
+            galleryText: 'Discover the archaeological findings and reconstructions of the Old Hagia Sophia',
             connect: 'Connect',
             legal: 'Legal',
             impressum: 'Impressum',
@@ -132,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
             aboutText1: 'Wir sind ein kleines interdisziplinäres Studententeam der Hochschule Furtwangen (HFU), das im Rahmen unserer Projektstudien arbeitet. In Zusammenarbeit mit der Byzantinischen Abteilung der Universität Freiburg entwickeln wir eine digitale Anwendung, die die Erforschung und Analyse archäologischer Funde unter der heutigen Hagia Sophia ermöglicht.',
             aboutText2: 'Mit Hilfe modernster 3D-Rekonstruktionstechniken modellieren wir die Ausgrabungen digital, um sie für die akademische Forschung und öffentliche Bildung zugänglich zu machen. Unser Ziel ist es, archäologisches Wissen durch technologische Ansätze neu zu erschließen und einer breiteren Öffentlichkeit anschaulich und interaktiv zu vermitteln.',
             historyText: 'Von der byzantinischen Kathedrale zur osmanischen Moschee - erkunden Sie die reiche Geschichte dieses architektonischen Meisterwerks.',
+            galleryText: 'Entdecken Sie die archäologischen Funde und Rekonstruktionen der Alten Hagia Sophia',
             connect: 'Kontakt',
             legal: 'Rechtliches',
             impressum: 'Impressum',
@@ -207,6 +209,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 historyText.textContent = translations[lang].historyText;
             }
 
+            // Gallery text
+            const galleryText = document.querySelector('#gallery .section-text');
+            if (galleryText) {
+                galleryText.textContent = translations[lang].galleryText;
+            }
+
             // Footer
             const footerElements = {
                 connect: document.querySelector('.footer-section h3:first-child'),
@@ -273,4 +281,155 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+});
+
+// Gallery Lightbox Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxDescription = document.getElementById('lightbox-description');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxPrev = document.querySelector('.lightbox-prev');
+    const lightboxNext = document.querySelector('.lightbox-next');
+    
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    let currentImageIndex = 0;
+    let images = [];
+
+    // Initialize gallery
+    function initGallery() {
+        images = Array.from(galleryItems).map(item => ({
+            src: item.getAttribute('data-image'),
+            title: item.getAttribute('data-title'),
+            description: item.querySelector('.gallery-info p').textContent
+        }));
+
+        // Add click event to each gallery item
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                openLightbox(index);
+            });
+        });
+    }
+
+    // Open lightbox
+    function openLightbox(index) {
+        currentImageIndex = index;
+        const image = images[index];
+        
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.title;
+        lightboxTitle.textContent = image.title;
+        lightboxDescription.textContent = image.description;
+        
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        
+        // Update navigation buttons
+        updateNavigationButtons();
+    }
+
+    // Close lightbox
+    function closeLightbox() {
+        lightbox.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    // Navigate to previous image
+    function prevImage() {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        const image = images[currentImageIndex];
+        
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.title;
+        lightboxTitle.textContent = image.title;
+        lightboxDescription.textContent = image.description;
+        
+        updateNavigationButtons();
+    }
+
+    // Navigate to next image
+    function nextImage() {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        const image = images[currentImageIndex];
+        
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.title;
+        lightboxTitle.textContent = image.title;
+        lightboxDescription.textContent = image.description;
+        
+        updateNavigationButtons();
+    }
+
+    // Update navigation button visibility
+    function updateNavigationButtons() {
+        if (images.length <= 1) {
+            lightboxPrev.style.display = 'none';
+            lightboxNext.style.display = 'none';
+        } else {
+            lightboxPrev.style.display = 'block';
+            lightboxNext.style.display = 'block';
+        }
+    }
+
+    // Event listeners
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', prevImage);
+    lightboxNext.addEventListener('click', nextImage);
+
+    // Close lightbox when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('show')) return;
+        
+        switch(e.key) {
+            case 'Escape':
+                closeLightbox();
+                break;
+            case 'ArrowLeft':
+                prevImage();
+                break;
+            case 'ArrowRight':
+                nextImage();
+                break;
+        }
+    });
+
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe left - next image
+                nextImage();
+            } else {
+                // Swipe right - previous image
+                prevImage();
+            }
+        }
+    }
+
+    // Initialize gallery when DOM is loaded
+    initGallery();
 }); 
