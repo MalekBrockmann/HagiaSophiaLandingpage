@@ -240,6 +240,9 @@ p {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
+    /* Fallback for older browsers */
+    display: -ms-grid;
+    -ms-grid-columns: 1fr 2rem 1fr 2rem 1fr;
 }
 
 .gallery-item {
@@ -251,11 +254,19 @@ p {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     background: #f8f8f8;
+    /* Fallback for older browsers */
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
 }
 
 .gallery-item:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    /* Fallback for older browsers */
+    -webkit-transform: translateY(-8px);
+    -moz-transform: translateY(-8px);
+    -o-transform: translateY(-8px);
 }
 
 .gallery-item img {
@@ -263,10 +274,18 @@ p {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    /* Fallback for older browsers */
+    -webkit-transition: transform 0.3s ease;
+    -moz-transition: transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
 }
 
 .gallery-item:hover img {
     transform: scale(1.05);
+    /* Fallback for older browsers */
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -o-transform: scale(1.05);
 }
 
 .gallery-overlay {
@@ -310,6 +329,8 @@ p {
     background-color: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    /* Fallback for older browsers */
+    background-color: rgba(0, 0, 0, 0.98);
 }
 
 .lightbox.show {
@@ -317,6 +338,10 @@ p {
     align-items: center;
     justify-content: center;
     animation: fadeIn 0.3s ease;
+    /* Fallback for older browsers */
+    -webkit-animation: fadeIn 0.3s ease;
+    -moz-animation: fadeIn 0.3s ease;
+    -o-animation: fadeIn 0.3s ease;
 }
 
 .lightbox-content {
