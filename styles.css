@@ -139,21 +139,22 @@ p {
     text-align: center;
 }
 
-/* 3D Model Section */
+/* 3D Model Section: Responsive, keine Scrollbars */
 .model-section {
-    background-color: #f5f5f7;
-}
-
-.model-section .container {
-    padding-bottom: 0; /* Remove bottom padding since model takes full height */
+    padding: 0 !important;
+    margin: 0;
 }
 
 .model-container {
-    width: 100%;
-    height: 60vh;
-    margin-top: 2rem; /* Add space after heading */
+    width: 100vw;
+    height: calc(100vh - 80px); /* 80px = Headerhöhe */
+    margin: 0;
     position: relative;
     background: #fff;
+    overflow: hidden;
+    max-width: 100vw;
+    max-height: calc(100vh - 80px);
+    box-sizing: border-box;
 }
 
 .model-placeholder {
