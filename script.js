@@ -1,21 +1,26 @@
 // Intersection Observer for section animations
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
+document.addEventListener('DOMContentLoaded', function() {
+    // Add js-loaded class to enable animations
+    document.body.classList.add('js-loaded');
+    
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
     });
-}, observerOptions);
-
-// Observe all sections
-document.querySelectorAll('.section').forEach(section => {
-    observer.observe(section);
 });
 
 // Header scroll effect
@@ -270,13 +275,18 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                const headerOffset = 80; // Height of the fixed header
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                // Close mobile menu if open
+                const navLinks = document.getElementById('nav-links');
+                const navToggle = document.getElementById('nav-toggle');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    navToggle.classList.remove('active');
+                }
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
+                // Smooth scroll to target
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             }
         });
@@ -433,3 +443,87 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize gallery when DOM is loaded
     initGallery();
 }); 
+
+// Responsive handling for Unity iframe
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        const unityWrapper = document.querySelector('.unity-wrapper');
+        if (unityWrapper) {
+            const width = unityWrapper.offsetWidth;
+            const height = width * (9/16); // 16:9 aspect ratio
+            unityWrapper.style.height = `${height}px`;
+        }
+    }, 250);
+});
+
+// Touch event handling for gallery
+document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('touchstart', function(e) {
+        this.classList.add('touch-active');
+    }, { passive: true });
+
+    item.addEventListener('touchend', function(e) {
+        this.classList.remove('touch-active');
+    });
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            // Close mobile menu if open
+            const navLinks = document.getElementById('nav-links');
+            const navToggle = document.getElementById('nav-toggle');
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+
+            // Smooth scroll to target
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Intersection Observer for lazy loading
+const observerOptions = {
+    root: null,
+    rootMargin: '50px',
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            if (entry.target.tagName.toLowerCase() === 'img') {
+                entry.target.src = entry.target.dataset.src;
+                entry.target.classList.add('loaded');
+                observer.unobserve(entry.target);
+            } else {
+                entry.target.classList.add('visible');
+            }
+        }
+    });
+}, observerOptions);
+
+// Observe all sections and images
+document.querySelectorAll('.section, img[data-src]').forEach(el => {
+    observer.observe(el);
+});
+
+// Prevent zoom on double tap for touch devices
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+    }
+    lastTouchEnd = now;
+}, { passive: false }); 

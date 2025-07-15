@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Hagia Sophia</title>
-    <link rel="stylesheet" href="styles.css?v=1.1">
+    <link rel="stylesheet" href="styles.css?v=1.3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -16,7 +19,12 @@
             <div class="logo" id="logo">
                 <a href="#"><img src="logo.svg" alt="Hagia Sophia Logo" width="60" height="60"></a>
             </div>
-            <ul class="nav-links">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#model">3D Model</a></li>
                 <li class="nav-history">
@@ -86,10 +94,11 @@
                         <iframe 
                             id="unity-iframe"
                             src="https://siggyyyyyyy.github.io/HS-Webpage/" 
-                            style="width: 100%; height: 100%; border: none;"
+                            style="width: 100%; height: 100%; border: none; overflow: hidden;"
                             title="Hagia Sophia 3D Experience"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
+                            allowfullscreen
+                            scrolling="no">
                         </iframe>
                     </div>
                 </div>
@@ -251,5 +260,80 @@
     </footer>
 
     <script src="script.js?v=1.1"></script>
+    <script>
+        // Mobile Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('nav-toggle');
+            const navLinks = document.getElementById('nav-links');
+            
+            if (navToggle && navLinks) {
+                navToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    this.classList.toggle('active');
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!navLinks.contains(e.target) && !navToggle.contains(e.target) && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        navToggle.classList.remove('active');
+                    }
+                });
+
+                // Close mobile menu when clicking on a nav link
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        navLinks.classList.remove('active');
+                        navToggle.classList.remove('active');
+                    });
+                });
+            }
+        });
+
+        // Responsive Unity iframe handler
+        function adjustUnitySize() {
+            const unityWrapper = document.querySelector('.unity-wrapper');
+            const modelContainer = document.querySelector('.model-container');
+            const iframe = document.getElementById('unity-iframe');
+            
+            if (unityWrapper && modelContainer && iframe) {
+                const containerWidth = modelContainer.offsetWidth;
+                
+                // Force 16:9 landscape aspect ratio
+                const aspectRatio = 16 / 9;
+                const calculatedHeight = containerWidth / aspectRatio;
+                
+                // Set container height based on width for consistent landscape format
+                modelContainer.style.height = `${calculatedHeight}px`;
+                
+                // Ensure the iframe fills the container properly and disable scrolling
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.overflow = 'hidden';
+                iframe.style.objectFit = 'fill';
+                iframe.setAttribute('scrolling', 'no');
+                
+                // Prevent any scrolling within the Unity application
+                iframe.onload = function() {
+                    try {
+                        if (iframe.contentDocument) {
+                            iframe.contentDocument.body.style.overflow = 'hidden';
+                            iframe.contentDocument.body.style.margin = '0';
+                            iframe.contentDocument.body.style.padding = '0';
+                        }
+                    } catch (e) {
+                        // Cross-origin restrictions - ignore
+                    }
+                };
+            }
+        }
+
+        // Run on load and resize
+        window.addEventListener('load', adjustUnitySize);
+        window.addEventListener('resize', function() {
+            clearTimeout(this.resizeTimer);
+            this.resizeTimer = setTimeout(adjustUnitySize, 250);
+        });
+    </script>
 </body>
 </html> 
